@@ -1,0 +1,8 @@
+import assert from 'assert';
+import logarithm from './logarithm.js';
+
+describe('logarithm', () => {
+    it('should return the correct logarithm value', () => {
+        assert.strictEqual(logarithm(100, 10), 2);
+    });
+});

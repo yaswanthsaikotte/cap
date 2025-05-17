@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Latest Questions</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+    .question { border: 1px solid #ccc; padding: 1em; margin-bottom: 1em; }
+    .options { margin-left: 1em; }
+    .answer { color: green; font-weight: bold; margin-top: 0.5em; }
+  </style>
+</head>
+<body>
+  <h1>Latest Questions</h1>
+  <div id="questions-container">Loading questions…</div>
+
+  <script>
+    (async function loadQuestions() {
+      const container = document.getElementById('questions-container');
+      try {
+        const questions = await fetch('/api/questions').then(r => r.json());
+        container.innerHTML = questions.map((q, i) => {
+          const opts = (q.options || [])
+            .map(o => `<li>${o}</li>`)
+            .join('');
+          return `
+            <div class="question">
+              <h3>Q${i+1}: ${q.question}</h3>
+              ${opts ? `<ul class="options">${opts}</ul>` : ''}
+              <div class="answer">Answer: ${q.answer}</div>
+            </div>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error(err);
+        container.textContent = '❌ Failed to load questions.';
+      }
+    })();
+  </script>
+</body>
+</html>

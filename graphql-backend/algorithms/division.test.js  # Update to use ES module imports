@@ -1,0 +1,7 @@
+import divide from './division.js';
+
+describe('Division Algorithm', () => {
+    it('should return 2 when dividing 4 by 2', () => {
+        expect(divide(4, 2)).toBe(2);
+    });
+});

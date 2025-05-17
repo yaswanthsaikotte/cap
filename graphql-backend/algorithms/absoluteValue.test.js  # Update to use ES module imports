@@ -1,0 +1,6 @@
+import assert from 'assert';
+import absoluteValue from './absoluteValue.js';
+
+test('absoluteValue should return the absolute value of a number', () => {
+    assert.strictEqual(absoluteValue(-5), 5);
+});
